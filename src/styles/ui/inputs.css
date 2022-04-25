@@ -1,0 +1,13 @@
+:root {
+	--input-height: 40px;
+    --input-padding: 1rem;
+    --input-shadow: var(--shadow-sm);
+    --input-shadow-focused: var(--shadow-md);
+
+    --input-color-placeholder: var(--color-lightgray);
+    --input-border-radius: var(--radius-sm);
+
+    /* Error */
+    --input-with-error-border: 1px solid var(--color-red);
+    --input-with-error-color: var(--color-red);
+}
