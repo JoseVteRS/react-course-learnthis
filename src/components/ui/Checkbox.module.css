@@ -1,0 +1,25 @@
+.checkbox {
+	height: 32px;
+	width: 32px;
+	box-shadow: var(--shadow-sm);
+	border-radius: var(--radius-sm);
+	background-color: #fff;
+	appearance: none;
+}
+
+.checkbox:checked {
+	background-color: #fff;
+	clip-path: polygon(0% 0%, 50% 0%, 100% 50%, 50% 100%, 0% 100%, 50% 50%);
+}
+
+.checkbox:focus {
+	box-shadow: var(--shadow-md);
+}
+
+.checkbox::before {
+	background-color: rosybrown;
+}
+
+.checkbox:checked::before {
+	background-color: rosybrown;
+}
