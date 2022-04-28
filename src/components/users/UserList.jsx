@@ -7,8 +7,6 @@ import { useFilters, useUsers } from "../../lib/hooks";
 import UsersListFilter from "./UsersListFilter";
 import UsersListRows from "./UsersListRows";
 import style from "./UserList.module.css";
-import Button from "../ui/Button";
-import Checkbox from "../ui/Checkbox";
 
 const UserList = ({ initialUsers }) => {
 	const { search, onlyActive, sortBy, ...setFilterFunctions } = useFilters();
@@ -20,20 +18,13 @@ const UserList = ({ initialUsers }) => {
 
 	return (
 		<div className={style.wrapper}>
-			<h1>Listado de usuarios</h1>
+			<h1 className={style.title}>Listado de usuarios</h1>
 			<UsersListFilter
 				search={search}
 				onlyActive={onlyActive}
 				sortBy={sortBy}
 				{...setFilterFunctions}
 			/>
-			<Button type='primary'>Botón</Button>
-			<Button type='secondary'>Botón</Button>
-			<Button type='secondary' disabled>
-				Botón
-			</Button>
-			<Checkbox label='Hola' />
-			<Checkbox />
 			<UsersListRows users={usersFiltered} />
 		</div>
 	);
