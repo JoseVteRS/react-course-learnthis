@@ -32,6 +32,7 @@ const UserList = ({ initialUsers }) => {
 			<Button type='secondary' disabled>
 				Botón
 			</Button>
+			<Checkbox label='Hola' />
 			<Checkbox />
 			<UsersListRows users={usersFiltered} />
 		</div>
