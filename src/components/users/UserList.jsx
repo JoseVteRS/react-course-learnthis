@@ -1,12 +1,12 @@
-import {
-	filterActiveUsers,
-	filterUsersByName
-} from "../../lib/filtersAndSorters/users/filters";
-import { sortUsers } from "../../lib/filtersAndSorters/users/sorters";
 import { useFilters, useUsers } from "../../lib/hooks";
 import UsersListFilter from "./UsersListFilter";
 import UsersListRows from "./UsersListRows";
 import style from "./UserList.module.css";
+import {
+	filterActiveUsers,
+	filterUsersByName,
+	sortUsers
+} from "../../lib/users/filterUsers";
 
 const UserList = ({ initialUsers }) => {
 	const { search, onlyActive, sortBy, ...setFilterFunctions } = useFilters();
