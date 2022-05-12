@@ -15,7 +15,7 @@ const UserList = () => {
 		setItemsPerPage
 	} = useFilters();
 
-	const { users, totalPages } = useUsers(filters);
+	const { users, totalPages, error, loading } = useUsers(filters);
 
 	return (
 		<div className={style.wrapper}>
@@ -28,7 +28,7 @@ const UserList = () => {
 				setOnlyActive={setOnlyActive}
 				setSortBy={setSortBy}
 			/>
-			<UsersListRows users={users} />
+			<UsersListRows users={users} error={error} loading={loading} />
 			<UserListPagination
 				page={filters.page}
 				itemsPerPage={filters.itemsPerPage}
