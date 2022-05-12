@@ -51,7 +51,7 @@ export const useFilters = () => {
 	};
 
 	return {
-		...filters,
+		filters,
 		setSearch,
 		setOnlyActive,
 		setSortBy,

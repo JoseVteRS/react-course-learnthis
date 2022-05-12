@@ -8,11 +8,15 @@
 	border-radius: 50%;
 	border: none;
 	outline: none;
+	cursor: pointer;
 }
 
 .icon {
 	height: 1.25rem;
 	width: 1.25rem;
+}
+.button:disabled {
+	cursor: default;
 }
 
 .black {

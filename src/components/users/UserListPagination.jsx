@@ -18,13 +18,12 @@ const UserListPagination = ({
 					value={itemsPerPage}
 					onChange={ev => setItemsPerPage(Number(ev.target.value))}
 				>
-					<option value={1}>UNO</option>
-					<option value={2}>DOS</option>
-					<option value={3}>TRES</option>
+					<option value={1}>1</option>
+					<option value={2}>2</option>
+					<option value={3}>3</option>
 				</Select>
 				<p>Elementos por página</p>
 			</div>
-			<IconButton kind='red' filled icon={SearchIcon}></IconButton>
 			<PageSelector page={page} totalPages={totalPages} setPage={setPage} />
 		</div>
 	);

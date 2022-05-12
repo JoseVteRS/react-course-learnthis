@@ -13,11 +13,7 @@ import {
 
 const UserList = ({ initialUsers }) => {
 	const {
-		search,
-		onlyActive,
-		sortBy,
-		page,
-		itemsPerPage,
+		filters,
 		setSearch,
 		setOnlyActive,
 		setSortBy,
@@ -25,29 +21,23 @@ const UserList = ({ initialUsers }) => {
 		setItemsPerPage
 	} = useFilters();
 
-	const { users, totalPages } = getUsers(initialUsers, {
-		search,
-		onlyActive,
-		sortBy,
-		page,
-		itemsPerPage
-	});
+	const { users, totalPages } = getUsers(initialUsers, filters);
 
 	return (
 		<div className={style.wrapper}>
 			<h1 className={style.title}>Listado de usuarios</h1>
 			<UsersListFilter
-				search={search}
-				onlyActive={onlyActive}
-				sortBy={sortBy}
+				search={filters.search}
+				onlyActive={filters.onlyActive}
+				sortBy={filters.sortBy}
 				setSearch={setSearch}
 				setOnlyActive={setOnlyActive}
 				setSortBy={setSortBy}
 			/>
 			<UsersListRows users={users} />
 			<UserListPagination
-				page={page}
-				itemsPerPage={itemsPerPage}
+				page={filters.page}
+				itemsPerPage={filters.itemsPerPage}
 				setPage={setPage}
 				setItemsPerPage={setItemsPerPage}
 				totalPages={totalPages}
