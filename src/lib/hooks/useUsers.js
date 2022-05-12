@@ -1,7 +1,18 @@
-import { useState } from "react"
+import {
+	filterActiveUsers,
+	filterUsersByName,
+	paginateUsers,
+	sortUsers
+} from "../users/filterUsers";
 
+export const getUsers = (
+	initialUsers,
+	{ search, onlyActive, sortBy, items, itemsPerPage }
+) => {
+	let usersFiltered = filterActiveUsers(initialUsers, onlyActive);
+	usersFiltered = filterUsersByName(usersFiltered, search);
+	usersFiltered = sortUsers(usersFiltered, sortBy);
+	usersFiltered = paginateUsers(usersFiltered, items, itemsPerPage);
 
-export const useUsers = (initialUsers) => {
-    const [users, setUsers] = useState(initialUsers);
-    return { users }
-}
+	return { users: usersFiltered };
+};

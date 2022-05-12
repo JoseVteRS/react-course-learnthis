@@ -48,3 +48,10 @@ export const filterUsersByName = (users, search) => {
 		user.name.toLowerCase().includes(lowerCasedSearch)
 	);
 };
+
+export const paginateUsers = (users, page, itemsPerPage) => {
+	const startIndex = (page - 1) * itemsPerPage;
+	const endIndex = startIndex + itemsPerPage;
+
+	return users.slice(startIndex, endIndex);
+};
