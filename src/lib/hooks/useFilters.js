@@ -7,7 +7,7 @@ export const useFilters = () => {
 		onlyActive: false,
 		sortBy: SORT_OPTIONS.DEFAULT,
 		page: 1,
-		itemsPerPage: 2
+		itemsPerPage: 6
 	});
 
 	const setSearch = search =>
@@ -33,6 +33,7 @@ export const useFilters = () => {
 	const setSortBy = sortBy =>
 		setFilters({
 			...filters,
+			page: 1,
 			sortBy
 		});
 
@@ -46,6 +47,7 @@ export const useFilters = () => {
 	const setItemsPerPage = newItemsPerPage => {
 		setFilters({
 			...filters,
+			page: 1,
 			itemsPerPage: newItemsPerPage
 		});
 	};
