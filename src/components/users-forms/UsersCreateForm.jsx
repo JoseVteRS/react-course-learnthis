@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
+import { createUser } from "../../lib/api/usersApi";
 import { useCreateForm } from "../../lib/hooks/useCreateForm";
 import Button from "../buttons/Button";
 import IconButton from "../buttons/IconButton";
@@ -10,23 +11,15 @@ import Select from "../forms/Select";
 import CrossIcon from "../icon/CrossIcon";
 import style from "./UsersCreateForm.module.css";
 
-const UsersCreateForm = ({ onClose }) => {
+const UsersCreateForm = ({ onClose, onSuccess }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const { username, name, setName, setUsername } = useCreateForm();
-
-	const isDisabled =
-		!name.value ||
-		name.error ||
-		!username.value ||
-		username.error ||
-		username.loading ||
-		isSubmitting;
+	const { username, name, setName, setUsername, isFormValid } = useCreateForm();
 
 	return (
 		<div className={style.wrapper}>
 			<form
 				onSubmit={ev =>
-					handleSubmit(ev, name, username, onClose, setIsSubmitting)
+					handleSubmit(ev, name, username, onClose, setIsSubmitting, onSuccess)
 				}
 			>
 				<IconButton
@@ -65,7 +58,11 @@ const UsersCreateForm = ({ onClose }) => {
 						<InputCheckbox name='active' />
 						<span>¿Activo?</span>
 					</div>
-					<Button kind='primary' type='submit' disabled={isDisabled}>
+					<Button
+						kind='primary'
+						type='submit'
+						disabled={isFormValid || isSubmitting}
+					>
 						{isSubmitting ? "Cargando" : "Crear usuario"}
 					</Button>
 				</div>
@@ -74,7 +71,14 @@ const UsersCreateForm = ({ onClose }) => {
 	);
 };
 
-const handleSubmit = async (ev, name, username, onClose, setIsSubmitting) => {
+const handleSubmit = async (
+	ev,
+	name,
+	username,
+	onClose,
+	setIsSubmitting,
+	onSuccess
+) => {
 	ev.preventDefault();
 	setIsSubmitting(true);
 
@@ -86,14 +90,10 @@ const handleSubmit = async (ev, name, username, onClose, setIsSubmitting) => {
 		active: ev.target.active.checked
 	};
 
-	const res = await fetch("http://localhost:4003/users", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(user)
-	});
+	const success = await createUser(user);
 
-	if (res.ok) {
-		// TODO: Actualizar los usuarios
+	if (success) {
+		onSuccess();
 		onClose();
 		console.log("Usuario creado");
 	} else {
