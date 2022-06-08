@@ -16,9 +16,20 @@ import {
 	sortUsers
 } from "../../lib/users/filterUsers";
 import UserFormLayout from "../users-forms/UserFormLayout";
+import UsersEditForm from "../users-forms/UsersEditForm";
 
 const UserList = () => {
-	const { currentForm, setFiltersForm, setCreateForm } = useForm();
+	const {
+		currentForm,
+		currentUser,
+		setFiltersForm,
+		setCreateForm,
+		setEditForm,
+		setDeleteForm
+	} = useForm();
+
+	console.log(currentUser);
+
 	const {
 		filters,
 		pagination,
@@ -56,7 +67,12 @@ const UserList = () => {
 				/>
 			) : (
 				<UserFormLayout onClose={setFiltersForm}>
-					<UsersCreateForm onSuccess={onSuccess} />
+					{currentForm === USER_FORMS.CREATE && (
+						<UsersCreateForm onSuccess={onSuccess} />
+					)}
+					{currentForm === USER_FORMS.EDIT && (
+						<UsersEditForm onSuccess={onSuccess} user={currentUser} />
+					)}
 				</UserFormLayout>
 			)}
 
@@ -64,6 +80,8 @@ const UserList = () => {
 				users={paginatedUsers}
 				error={usersError}
 				loading={usersLoading}
+				setEditForm={setEditForm}
+				setDeleteForm={setDeleteForm}
 			/>
 			<UserListPagination
 				{...pagination}
@@ -93,15 +111,17 @@ const getUsersToDisplay = (
 };
 
 const useForm = () => {
-	const [currentForm, setCurrentForm] = useState(USER_FORMS.FILTER);
+	const [currentForm, setCurrentForm] = useState({ form: USER_FORMS.FILTER });
 
-	const setFiltersForm = () => setCurrentForm(USER_FORMS.FILTER);
-	const setCreateForm = () => setCurrentForm(USER_FORMS.CREATE);
-	const setEditForm = () => setCurrentForm(USER_FORMS.EDIT);
-	const setDeleteForm = () => setCurrentForm(USER_FORMS.DELETE);
+	const setFiltersForm = () => setCurrentForm({ form: USER_FORMS.FILTER });
+	const setCreateForm = () => setCurrentForm({ form: USER_FORMS.CREATE });
+	const setEditForm = user => setCurrentForm({ form: USER_FORMS.EDIT, user });
+	const setDeleteForm = user =>
+		setCurrentForm({ form: USER_FORMS.DELETE, user });
 
 	return {
-		currentForm,
+		currentForm: currentForm.form,
+		currentUser: currentForm.user,
 		setFiltersForm,
 		setCreateForm,
 		setEditForm,
