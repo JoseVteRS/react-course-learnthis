@@ -15,14 +15,19 @@ import {
 	paginateUsers,
 	sortUsers
 } from "../../lib/users/filterUsers";
+import UserFormLayout from "../users-forms/UserFormLayout";
 
 const UserList = () => {
 	const { currentForm, setFiltersForm, setCreateForm } = useForm();
-	const { filters, pagination, filtersSetters, paginationSetters } =
-		useFilters();
+	const {
+		filters,
+		pagination,
+		filtersSetters,
+		paginationSetters,
+		resetFilters
+	} = useFilters();
 
-	const { users, usersError, usersLoading, reloadUsers, setResetFilter } =
-		useUsers(filters);
+	const { users, usersError, usersLoading, reloadUsers } = useUsers(filters);
 
 	const { paginatedUsers, totalPages } = getUsersToDisplay(
 		users,
@@ -32,7 +37,8 @@ const UserList = () => {
 
 	const onSuccess = () => {
 		reloadUsers();
-		setResetFilter();
+		resetFilters();
+		setFiltersForm();
 	};
 
 	return (
@@ -49,7 +55,9 @@ const UserList = () => {
 					}
 				/>
 			) : (
-				<UsersCreateForm onClose={setFiltersForm} onSuccess={onSuccess} />
+				<UserFormLayout onClose={setFiltersForm}>
+					<UsersCreateForm onSuccess={onSuccess} />
+				</UserFormLayout>
 			)}
 
 			<UsersListRows

@@ -55,7 +55,7 @@ export const useFilters = () => {
 		});
 	};
 
-	const setResetFilter = () => setFilters(INITIAL_STATE);
+	const resetFilters = () => setFilters(INITIAL_STATE);
 
 	const { search, onlyActive, sortBy, page, itemsPerPage } = filters;
 
@@ -78,6 +78,6 @@ export const useFilters = () => {
 			setPage,
 			setItemsPerPage
 		},
-		setResetFilter
+		resetFilters
 	};
 };
