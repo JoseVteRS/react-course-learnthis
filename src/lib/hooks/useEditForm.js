@@ -4,19 +4,7 @@ import { debounce } from "../debounce";
 import { validateName, validateUsername } from "../users/usersValidation";
 
 export const useEditForm = user => {
-	const [formValues, setFormValues] = useState({
-		name: {
-			value: user.name,
-			error: undefined
-		},
-		username: {
-			value: user.username,
-			loading: false,
-			error: undefined
-		},
-		role: user.role,
-		active: user.active
-	});
+	const [formValues, setFormValues] = useState(() => getInitialState(user));
 
 	const setName = newName => {
 		const error = validateName(newName);
@@ -28,9 +16,11 @@ export const useEditForm = user => {
 
 	const setUsername = newUsername => {
 		const error = validateUsername(newUsername);
+		const isInitial = newUsername === user.username;
+
 		setFormValues({
 			...formValues,
-			username: { value: newUsername, loading: !error, error }
+			username: { value: newUsername, loading: !error && !isInitial, error }
 		});
 	};
 
@@ -55,6 +45,9 @@ export const useEditForm = user => {
 		}));
 
 	useEffect(() => {
+		setFormValues(getInitialState(user));
+	}, [user]);
+	useEffect(() => {
 		if (!formValues.username.loading) return;
 
 		const controller = new AbortController();
@@ -72,10 +65,10 @@ export const useEditForm = user => {
 		};
 	}, [formValues.username.value, formValues.username.loading]);
 
-	const isFormValid =
+	const isFormInvalid =
+		areInitialValues(formValues, user) ||
 		!formValues.name.value ||
 		formValues.name.error ||
-		!formValues.username.value ||
 		formValues.username.error ||
 		formValues.username.loading;
 
@@ -85,9 +78,29 @@ export const useEditForm = user => {
 		setUsername,
 		setUserRole,
 		setUserActive,
-		isFormValid
+		isFormInvalid
 	};
 };
+
+const getInitialState = user => ({
+	name: {
+		value: user.name,
+		error: undefined
+	},
+	username: {
+		value: user.username,
+		loading: false,
+		error: undefined
+	},
+	role: user.role,
+	active: user.active
+});
+
+const areInitialValues = (formValues, user) =>
+	formValues.name.value === user.name &&
+	formValues.username.value === user.username &&
+	formValues.role.value === user.role &&
+	formValues.active.value === user.active;
 
 const validateUsernameIsAvailable = async (
 	username,

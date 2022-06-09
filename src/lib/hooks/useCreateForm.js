@@ -60,14 +60,14 @@ export const useCreateForm = () => {
 		};
 	}, [formValues.username.value, formValues.username.loading]);
 
-	const isFormValid =
+	const isFormInvalid =
 		!formValues.name.value ||
 		formValues.name.error ||
 		!formValues.username.value ||
 		formValues.username.error ||
 		formValues.username.loading;
 
-	return { ...formValues, setName, setUsername, isFormValid };
+	return { ...formValues, setName, setUsername, isFormInvalid };
 };
 
 const validateUsernameIsAvailable = async (

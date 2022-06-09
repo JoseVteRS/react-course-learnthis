@@ -14,7 +14,8 @@ import style from "./UsersCreateForm.module.css";
 
 const UsersCreateForm = ({ onSuccess }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const { username, name, setName, setUsername, isFormValid } = useCreateForm();
+	const { username, name, setName, setUsername, isFormInvalid } =
+		useCreateForm();
 
 	return (
 		<form
@@ -55,7 +56,7 @@ const UsersCreateForm = ({ onSuccess }) => {
 				<Button
 					kind='primary'
 					type='submit'
-					disabled={isFormValid || isSubmitting}
+					disabled={isFormInvalid || isSubmitting}
 				>
 					{isSubmitting ? "Cargando" : "Crear usuario"}
 				</Button>

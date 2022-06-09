@@ -12,6 +12,32 @@ export const createUser = async user => {
 	}
 };
 
+export const updateUser = async user => {
+	try {
+		const res = await fetch(`http://localhost:4003/users/${user.id}`, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(user)
+		});
+
+		return res.ok;
+	} catch (error) {
+		return false;
+	}
+};
+
+export const deleteUserById = async userId => {
+	try {
+		const res = await fetch(`http://localhost:4003/users/${userId}`, {
+			method: "DELETE"
+		});
+
+		return res.ok;
+	} catch (error) {
+		return false;
+	}
+};
+
 export const findAllUsers = async signal => {
 	try {
 		const res = await fetch("http://localhost:4003/users", { signal });
