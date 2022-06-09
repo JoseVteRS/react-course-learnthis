@@ -61,3 +61,21 @@ export const paginateUsers = (users, page, itemsPerPage) => {
 		paginatedUsers
 	};
 };
+
+export const getUsersToDisplay = (
+	users,
+	{ search, onlyActive, sortBy },
+	{ page, itemsPerPage }
+) => {
+	let usersFiltered = filterActiveUsers(users, onlyActive);
+	usersFiltered = filterUsersByName(usersFiltered, search);
+	usersFiltered = sortUsers(usersFiltered, sortBy);
+
+	const { totalPages, paginatedUsers } = paginateUsers(
+		usersFiltered,
+		page,
+		itemsPerPage
+	);
+
+	return { paginatedUsers, totalPages };
+};

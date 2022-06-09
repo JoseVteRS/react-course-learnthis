@@ -5,19 +5,14 @@ import UsersListRows from "./UsersListRows";
 import style from "./UserList.module.css";
 import UserListPagination from "./UserListPagination";
 import Button from "../buttons/Button";
-import InputText from "../forms/InputText";
-import InputTextAsync from "../forms/InputTextAsync";
+import { getUsersToDisplay } from "../../lib/users/filterUsers";
 import { USER_FORMS } from "../../constants/usersForms";
 import UsersCreateForm from "../users-forms/UsersCreateForm";
-import {
-	filterActiveUsers,
-	filterUsersByName,
-	paginateUsers,
-	sortUsers
-} from "../../lib/users/filterUsers";
 import UserFormLayout from "../users-forms/UserFormLayout";
 import UsersEditForm from "../users-forms/UsersEditForm";
 import UsersDeleteForm from "../users-forms/UsersDeleteForm";
+import { useSelectedForm } from "../../lib/hooks/useSelectedForm";
+import { UserFormContext } from "../../lib/context/UserFormContext";
 
 const UserList = () => {
 	const {
@@ -27,9 +22,7 @@ const UserList = () => {
 		setCreateForm,
 		setEditForm,
 		setDeleteForm
-	} = useForm();
-
-	console.log(currentUser);
+	} = useSelectedForm();
 
 	const {
 		filters,
@@ -83,14 +76,13 @@ const UserList = () => {
 					)}
 				</UserFormLayout>
 			)}
-
-			<UsersListRows
-				users={paginatedUsers}
-				error={usersError}
-				loading={usersLoading}
-				setEditForm={setEditForm}
-				setDeleteForm={setDeleteForm}
-			/>
+			<UserFormContext.Provider value={{ setEditForm, setDeleteForm }}>
+				<UsersListRows
+					users={paginatedUsers}
+					error={usersError}
+					loading={usersLoading}
+				/>
+			</UserFormContext.Provider>
 			<UserListPagination
 				{...pagination}
 				{...paginationSetters}
@@ -98,43 +90,6 @@ const UserList = () => {
 			/>
 		</div>
 	);
-};
-
-const getUsersToDisplay = (
-	users,
-	{ search, onlyActive, sortBy },
-	{ page, itemsPerPage }
-) => {
-	let usersFiltered = filterActiveUsers(users, onlyActive);
-	usersFiltered = filterUsersByName(usersFiltered, search);
-	usersFiltered = sortUsers(usersFiltered, sortBy);
-
-	const { totalPages, paginatedUsers } = paginateUsers(
-		usersFiltered,
-		page,
-		itemsPerPage
-	);
-
-	return { paginatedUsers, totalPages };
-};
-
-const useForm = () => {
-	const [currentForm, setCurrentForm] = useState({ form: USER_FORMS.FILTER });
-
-	const setFiltersForm = () => setCurrentForm({ form: USER_FORMS.FILTER });
-	const setCreateForm = () => setCurrentForm({ form: USER_FORMS.CREATE });
-	const setEditForm = user => setCurrentForm({ form: USER_FORMS.EDIT, user });
-	const setDeleteForm = user =>
-		setCurrentForm({ form: USER_FORMS.DELETE, user });
-
-	return {
-		currentForm: currentForm.form,
-		currentUser: currentForm.user,
-		setFiltersForm,
-		setCreateForm,
-		setEditForm,
-		setDeleteForm
-	};
 };
 
 export default UserList;
