@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 };
 
 export const useFilters = () => {
-	const [filters, setFilters] = useState(INITIAL_STATE);
+	const [filters, setFilters] = useState({ ...INITIAL_STATE });
 
 	const setSearch = search =>
 		setFilters({
@@ -60,15 +60,7 @@ export const useFilters = () => {
 	const { search, onlyActive, sortBy, page, itemsPerPage } = filters;
 
 	return {
-		filters: {
-			search,
-			onlyActive,
-			sortBy
-		},
-		pagination: {
-			page,
-			itemsPerPage
-		},
+		filters,
 		filtersSetters: {
 			setSearch,
 			setOnlyActive,
