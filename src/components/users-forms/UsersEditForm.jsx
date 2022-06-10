@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
 import { createUser, updateUser } from "../../lib/api/usersApi";
+import { UserFormContext } from "../../lib/context/UserFormContext";
 import { useEditForm } from "../../lib/hooks/useEditForm";
 import Button from "../buttons/Button";
 import InputCheckbox from "../forms/InputCheckbox";
@@ -10,8 +11,11 @@ import Select from "../forms/Select";
 
 import style from "./UsersEditForm.module.css";
 
-const UsersEditForm = ({ onSuccess, user }) => {
+const UsersEditForm = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	const { currentUser, onSuccess } = useContext(UserFormContext);
+
 	const {
 		username,
 		name,
@@ -22,7 +26,7 @@ const UsersEditForm = ({ onSuccess, user }) => {
 		setUserRole,
 		setUserActive,
 		isFormInvalid
-	} = useEditForm(user);
+	} = useEditForm(currentUser);
 
 	return (
 		<form
@@ -30,7 +34,7 @@ const UsersEditForm = ({ onSuccess, user }) => {
 				handleSubmit(
 					ev,
 					{
-						id: user.id,
+						id: currentUser.id,
 						name: name.value,
 						username: username.value,
 						role,
@@ -55,7 +59,7 @@ const UsersEditForm = ({ onSuccess, user }) => {
 					label='Username'
 					planceholder='johndoe'
 					success={
-						username.value !== user.username &&
+						username.value !== currentUser.username &&
 						!username.loading &&
 						!username.error
 					}

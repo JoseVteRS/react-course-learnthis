@@ -1,4 +1,8 @@
+import { useContext } from "react";
 import { SORT_OPTIONS } from "../../constants/sortOptions";
+import { USER_FORMS } from "../../constants/usersForms";
+import { UserFormContext } from "../../lib/context/UserFormContext";
+import Button from "../buttons/Button";
 import InputCheckbox from "../forms/InputCheckbox";
 import InputSearch from "../forms/InputSearch";
 import Select from "../forms/Select";
@@ -10,9 +14,12 @@ const UsersListFilter = ({
 	onlyActive,
 	setOnlyActive,
 	sortBy,
-	setSortBy,
-	slot
+	setSortBy
 }) => {
+	const { currentForm, setCreateForm } = useContext(UserFormContext);
+
+	if (currentForm !== USER_FORMS.FILTER) return null;
+
 	return (
 		<>
 			<div className={style.form}>
@@ -46,7 +53,10 @@ const UsersListFilter = ({
 						/>
 						<p>Mostrar sólo activos</p>
 					</div>
-					{slot}
+
+					<Button kind='primary' onClick={setCreateForm}>
+						Añadir usuario
+					</Button>
 				</div>
 			</div>
 		</>

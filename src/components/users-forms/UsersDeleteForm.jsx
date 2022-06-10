@@ -1,25 +1,22 @@
-import { useState } from "react";
-import { USER_ROLES } from "../../constants/userRoles";
-import { createUser, deleteUserById, updateUser } from "../../lib/api/usersApi";
-import { useEditForm } from "../../lib/hooks/useEditForm";
+import { useContext, useState } from "react";
+import { deleteUserById } from "../../lib/api/usersApi";
+import { UserFormContext } from "../../lib/context/UserFormContext";
 import Button from "../buttons/Button";
-import InputCheckbox from "../forms/InputCheckbox";
-import InputText from "../forms/InputText";
-import InputTextAsync from "../forms/InputTextAsync";
-import Select from "../forms/Select";
-
 import style from "./UsersDeleteForm.module.css";
 
-const UsersDeleteForm = ({ onSuccess, user, onCancel }) => {
+const UsersDeleteForm = ({ onSuccess }) => {
+	const { setFiltersForm, currentUser } = useContext(UserFormContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	return (
 		<form
-			onSubmit={ev => handleSubmit(ev, user.id, setIsSubmitting, onSuccess)}
+			onSubmit={ev =>
+				handleSubmit(ev, currentUser.id, setIsSubmitting, onSuccess)
+			}
 		>
 			<div className={style.row}>
 				<p className={style.text}>
-					¿Estás seguro de que quieres eliminar al usuario "{user.name}"?
+					¿Estás seguro de que quieres eliminar al usuario "{currentUser.name}"?
 				</p>
 			</div>
 			<div className={style.row}>
@@ -27,7 +24,7 @@ const UsersDeleteForm = ({ onSuccess, user, onCancel }) => {
 					kind='secondary'
 					type='button'
 					disabled={isSubmitting}
-					onClick={onCancel}
+					onClick={setFiltersForm}
 				>
 					{isSubmitting ? "Cargando..." : "Cancelar"}
 				</Button>

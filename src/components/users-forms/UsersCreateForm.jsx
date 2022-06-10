@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
 import { createUser } from "../../lib/api/usersApi";
+import { UserFormContext } from "../../lib/context/UserFormContext";
 import { useCreateForm } from "../../lib/hooks/useCreateForm";
 import Button from "../buttons/Button";
 import IconButton from "../buttons/IconButton";
@@ -9,10 +10,11 @@ import InputText from "../forms/InputText";
 import InputTextAsync from "../forms/InputTextAsync";
 import Select from "../forms/Select";
 import CrossIcon from "../icon/CrossIcon";
-import UserFormLayout from "./UserFormLayout";
+import UserFormLayout from "./UserLayoutContainer";
 import style from "./UsersCreateForm.module.css";
 
-const UsersCreateForm = ({ onSuccess }) => {
+const UsersCreateForm = () => {
+	const { onSuccess } = useContext(UserFormContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username, name, setName, setUsername, isFormInvalid } =
 		useCreateForm();
