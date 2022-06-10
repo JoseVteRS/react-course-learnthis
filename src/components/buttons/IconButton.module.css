@@ -19,6 +19,10 @@
 	cursor: default;
 }
 
+.button:focus {
+	box-shadow: var(--shadow-sm);
+}
+
 .black {
 	color: var(--color-black);
 }
