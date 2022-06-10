@@ -6,8 +6,11 @@ import UserListPagination from "./UserListPagination";
 import UserFormsProvider from "../providers/UsersFormProvider";
 import UserFormLayout from "../users-forms/UserLayoutContainer";
 import style from "./UsersList.module.css";
+import UserListViewSelector from "./UserListViewSelector";
+import { useState } from "react";
 
 const UsersList = () => {
+	const [view, setView] = useState(true);
 	const {
 		filters,
 		pagination,
@@ -30,11 +33,13 @@ const UsersList = () => {
 
 			<UserFormsProvider resetFilters={resetFilters} reloadUsers={reloadUsers}>
 				<UsersListFilter {...filters} {...filtersSetters} />
+				<UserListViewSelector view={view} setView={setView} />
 				<UserFormLayout />
 				<UsersListRows
 					users={paginatedUsers}
 					error={usersError}
 					loading={usersLoading}
+					view={view}
 				/>
 			</UserFormsProvider>
 			<UserListPagination

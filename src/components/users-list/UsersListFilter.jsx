@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { SORT_OPTIONS } from "../../constants/sortOptions";
 import { USER_FORMS } from "../../constants/usersForms";
-import { UserFormContext } from "../../lib/context/UserFormContext";
+import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import Button from "../buttons/Button";
 import InputCheckbox from "../forms/InputCheckbox";
 import InputSearch from "../forms/InputSearch";
@@ -16,7 +16,7 @@ const UsersListFilter = ({
 	sortBy,
 	setSortBy
 }) => {
-	const { currentForm, setCreateForm } = useContext(UserFormContext);
+	const { currentForm, setCreateForm } = useContext(UserFormsContext);
 
 	if (currentForm !== USER_FORMS.FILTER) return null;
 

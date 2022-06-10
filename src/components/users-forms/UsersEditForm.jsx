@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
 import { createUser, updateUser } from "../../lib/api/usersApi";
-import { UserFormContext } from "../../lib/context/UserFormContext";
+import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import { useEditForm } from "../../lib/hooks/useEditForm";
 import Button from "../buttons/Button";
 import InputCheckbox from "../forms/InputCheckbox";
@@ -14,7 +14,7 @@ import style from "./UsersEditForm.module.css";
 const UsersEditForm = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const { currentUser, onSuccess } = useContext(UserFormContext);
+	const { currentUser, onSuccess } = useContext(UserFormsContext);
 
 	const {
 		username,

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
 import { createUser } from "../../lib/api/usersApi";
-import { UserFormContext } from "../../lib/context/UserFormContext";
+import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import { useCreateForm } from "../../lib/hooks/useCreateForm";
 import Button from "../buttons/Button";
 import IconButton from "../buttons/IconButton";
@@ -14,7 +14,7 @@ import UserFormLayout from "./UserLayoutContainer";
 import style from "./UsersCreateForm.module.css";
 
 const UsersCreateForm = () => {
-	const { onSuccess } = useContext(UserFormContext);
+	const { onSuccess } = useContext(UserFormsContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username, name, setName, setUsername, isFormInvalid } =
 		useCreateForm();

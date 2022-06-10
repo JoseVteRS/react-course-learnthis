@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserFormContext } from "../../lib/context/UserFormContext";
+import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import UserRole from "../user/UserRole";
 import UserDisplay from "../user/UserDisplay";
 import UserStatus from "../user/UserStatus";
@@ -9,7 +9,7 @@ import IconButton from "../buttons/IconButton";
 import style from "./UserRow.module.css";
 
 const UserRow = ({ id, username, name, active, role }) => {
-	const { setDeleteForm, setEditForm } = useContext(UserFormContext);
+	const { setDeleteForm, setEditForm } = useContext(UserFormsContext);
 
 	return (
 		<div className={style.wrapper}>

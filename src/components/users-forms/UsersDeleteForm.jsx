@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { deleteUserById } from "../../lib/api/usersApi";
-import { UserFormContext } from "../../lib/context/UserFormContext";
+import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import Button from "../buttons/Button";
 import style from "./UsersDeleteForm.module.css";
 
 const UsersDeleteForm = ({ onSuccess }) => {
-	const { setFiltersForm, currentUser } = useContext(UserFormContext);
+	const { setFiltersForm, currentUser } = useContext(UserFormsContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	return (

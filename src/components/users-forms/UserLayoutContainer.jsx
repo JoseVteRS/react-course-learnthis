@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { USER_FORMS } from "../../constants/usersForms";
-import { UserFormContext } from "../../lib/context/UserFormContext";
+import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import IconButton from "../buttons/IconButton";
 import CrossIcon from "../icon/CrossIcon";
 import style from "./UserLayoutContainer.module.css";
@@ -15,7 +15,7 @@ const FORMS = {
 };
 
 const UserLayoutContainer = () => {
-	const { currentForm, setFiltersForm } = useContext(UserFormContext);
+	const { currentForm, setFiltersForm } = useContext(UserFormsContext);
 
 	const form = FORMS[currentForm];
 
