@@ -2,16 +2,19 @@ import GridIcon from "../icon/GridIcon";
 import Listicon from "../icon/Listicon";
 import style from "./UserListViewSelector.module.css";
 
-const UserListViewSelector = ({ view, setView }) => {
+const UserListViewSelector = ({ showRowsFormat, setShowRowsFormat }) => {
 	return (
 		<div className={style.wrapper}>
-			<button onClick={() => setView(false)} disabled={!view}>
+			<button
+				onClick={() => setShowRowsFormat(false)}
+				disabled={!showRowsFormat}
+			>
 				<GridIcon className={style.icon} />
 			</button>
 
 			<div className={style.divider} />
 
-			<button onClick={() => setView(true)} disabled={view}>
+			<button onClick={() => setShowRowsFormat(true)} disabled={showRowsFormat}>
 				<Listicon className={style.icon} />
 			</button>
 		</div>

@@ -10,12 +10,11 @@ import UserListViewSelector from "./UserListViewSelector";
 import { useState } from "react";
 
 const UsersList = () => {
-	const [view, setView] = useState(true);
+	const [showRowsFormat, setShowRowsFormat] = useState(true);
 	const { filters, filtersSetters, paginationSetters, resetFilters } =
 		useFilters();
 
-	const { users, usersCount, usersError, usersLoading, reloadUsers } =
-		useUsers(filters);
+	const { users, totalUsers, usersError, usersLoading } = useUsers(filters);
 
 	return (
 		<div className={style.wrapper}>
@@ -29,19 +28,22 @@ const UsersList = () => {
 					{...filtersSetters}
 				/>
 				<UserLayoutContainer />
-				<UserListViewSelector view={view} setView={setView} />
+				<UserListViewSelector
+					showRowsFormat={showRowsFormat}
+					setShowRowsFormat={setShowRowsFormat}
+				/>
 				<UsersListRows
 					users={users}
 					error={usersError}
 					loading={usersLoading}
-					view={view}
+					view={showRowsFormat}
 				/>
 			</UserFormsProvider>
 			<UserListPagination
 				page={filters.page}
 				itemsPerPage={filters.itemsPerPage}
 				{...paginationSetters}
-				totalUsers={usersCount}
+				totalUsers={totalUsers}
 			/>
 		</div>
 	);
