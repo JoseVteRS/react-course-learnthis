@@ -1,13 +1,13 @@
 import { useFilters, useUsers } from "../../lib/hooks";
+import { getUsersToDisplay } from "../../lib/users/filterUsers";
 import UsersListFilter from "./UsersListFilter";
 import UsersListRows from "./UsersListRows";
-import style from "./UserList.module.css";
 import UserListPagination from "./UserListPagination";
-import { getUsersToDisplay } from "../../lib/users/filterUsers";
+import UserFormsProvider from "../providers/UsersFormProvider";
 import UserFormLayout from "../users-forms/UserLayoutContainer";
-import UserFormsProvider from "./UsersFormProvider";
+import style from "./UsersList.module.css";
 
-const UserList = () => {
+const UsersList = () => {
 	const {
 		filters,
 		pagination,
@@ -46,4 +46,4 @@ const UserList = () => {
 	);
 };
 
-export default UserList;
+export default UsersList;

@@ -1,8 +1,5 @@
-import UserList from "./components/users/UserList";
-import { USER_ROLES } from "./constants/userRoles";
+import UsersList from "./components/users-list/UsersList.jsx";
 
-function App() {
-	return <UserList />;
-}
+const App = () => <UsersList />;
 
 export default App;

@@ -1,7 +1,5 @@
 import Select from "../forms/Select";
-import IconButton from "../buttons/IconButton";
 import style from "./UserListPagination.module.css";
-import SearchIcon from "../icon/SearchIcon";
 import PageSelector from "../icon/PageSelector";
 
 const UserListPagination = ({
