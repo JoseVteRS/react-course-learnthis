@@ -1,16 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
 import { createUser } from "../../lib/api/usersApi";
 import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import { useCreateForm } from "../../lib/hooks/useCreateForm";
 import Button from "../buttons/Button";
-import IconButton from "../buttons/IconButton";
+
 import InputCheckbox from "../forms/InputCheckbox";
 import InputText from "../forms/InputText";
 import InputTextAsync from "../forms/InputTextAsync";
 import Select from "../forms/Select";
-import CrossIcon from "../icon/CrossIcon";
-import UserFormLayout from "./UserLayoutContainer";
 import style from "./UsersCreateForm.module.css";
 
 const UsersCreateForm = () => {
@@ -22,7 +20,7 @@ const UsersCreateForm = () => {
 	return (
 		<form
 			onSubmit={ev =>
-				handleSubmit(ev, name, username, onClose, setIsSubmitting, onSuccess)
+				handleSubmit(ev, name, username, setIsSubmitting, onSuccess)
 			}
 		>
 			<div className={style.row}>
@@ -67,14 +65,7 @@ const UsersCreateForm = () => {
 	);
 };
 
-const handleSubmit = async (
-	ev,
-	name,
-	username,
-	onClose,
-	setIsSubmitting,
-	onSuccess
-) => {
+const handleSubmit = async (ev, name, username, setIsSubmitting, onSuccess) => {
 	ev.preventDefault();
 	setIsSubmitting(true);
 

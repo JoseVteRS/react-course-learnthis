@@ -16,7 +16,9 @@ const UsersDeleteForm = ({ onSuccess }) => {
 		>
 			<div className={style.row}>
 				<p className={style.text}>
-					¿Estás seguro de que quieres eliminar al usuario "{currentUser.name}"?
+					¿Estás seguro de que quieres eliminar al usuario {'"'}
+					{currentUser.name}
+					{'"'}?
 				</p>
 			</div>
 			<div className={style.row}>

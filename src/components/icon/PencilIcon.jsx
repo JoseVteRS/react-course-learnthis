@@ -1,5 +1,3 @@
-import React from "react";
-
 const PencilIcon = props => {
 	return (
 		<svg

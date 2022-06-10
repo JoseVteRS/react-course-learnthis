@@ -1,4 +1,3 @@
-import React from "react";
 import IconButton from "../buttons/IconButton";
 import ArrowLeftIcon from "../icon/ArrowLeftIcon";
 import ArrowRightIcon from "../icon/ArrowRightIcon";

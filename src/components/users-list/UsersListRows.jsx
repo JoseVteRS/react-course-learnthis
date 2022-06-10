@@ -1,4 +1,3 @@
-import React from "react";
 import UserCard from "./UserCard";
 import UserRow from "./UserRow";
 import style from "./UsersListRows.module.css";

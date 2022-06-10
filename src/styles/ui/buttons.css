@@ -1,25 +1,25 @@
 :root {
-    --button-height: 40px;
-    --button-padding-horizontal: 16px;
+	--button-height: 40px;
+	--button-padding-horizontal: 16px;
 
-    /* Background Button Colors */
-    --button-bg-primary: var(--color-black);
-    --button-bg-secondary: var(--color-white);
+	/* Background Button Colors */
+	--button-bg-primary: var(--color-black);
+	--button-bg-secondary: var(--color-white);
 
-    /* Shadows Button */
-    --button-shadow: var(--shadow-sm);
-    --button-shadow-hovered: var(--shadow-md);
+	/* Shadows Button */
+	--button-shadow: var(--shadow-sm);
+	--button-shadow-hovered: var(--shadow-md);
 
-    /* Borders Button */
-    --button-border: 1px solid var(--color-black);
-    --button-radius: 0.5rem;
+	/* Borders Button */
+	--button-border: 1px solid var(--color-black);
+	--button-radius: 0.5rem;
 
-    /* Colors Button */
-    --button-color-primary: var(--color-white);
-    --button-color-secondary: var(--color-black);
+	/* Colors Button */
+	--button-color-primary: var(--color-white);
+	--button-color-secondary: var(--color-black);
 
-    /* Disabled */
-    --button-bg-disabled: var(--color-white);
-    --button-border-disabled: var(--color-lightgray);
-    --button-color-disabled: var(--color-lightgray);
+	/* Disabled */
+	--button-bg-disabled: var(--color-white);
+	--button-border-disabled: var(--color-lightgray);
+	--button-color-disabled: var(--color-lightgray);
 }

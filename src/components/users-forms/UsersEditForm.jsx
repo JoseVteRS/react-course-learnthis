@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { USER_ROLES } from "../../constants/userRoles";
-import { createUser, updateUser } from "../../lib/api/usersApi";
+import { updateUser } from "../../lib/api/usersApi";
 import { UserFormsContext } from "../../lib/context/UserFormsContext";
 import { useEditForm } from "../../lib/hooks/useEditForm";
 import Button from "../buttons/Button";
